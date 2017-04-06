@@ -16,9 +16,26 @@ $phpunit = trim("
 ");
 file_put_contents("$dir/phpunit.xml", $phpunit);
 
-if (mkdir("$dir/tests")) {
-	$bootstrap = "<?php\n\n";
-	file_put_contents("$dir/tests/bootstrap.php", $bootstrap);
+if (!mkdir("$dir/tests")) {
+	exit("Can't create dir 'tests'");
 }
+
+$bootstrap = "<?php\n\n";
+file_put_contents("$dir/tests/bootstrap.php", $bootstrap);
+
+$general = trim("
+<?php
+
+use PHPUnit\Framework\TestCase;
+
+class GeneralTest extends TestCase
+{
+    public function testName()
+    {
+		
+    }
+}
+");
+file_put_contents("$dir/tests/general.php", $general);
 
 exit("Done");
