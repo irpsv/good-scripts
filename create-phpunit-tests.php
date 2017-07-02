@@ -16,8 +16,8 @@ $phpunit = trim("
 ");
 file_put_contents("$dir/phpunit.xml", $phpunit);
 
-if (!mkdir("$dir/test")) {
-	exit("Can't create dir 'test'");
+if (!mkdir("$dir/tests")) {
+	exit("Can't create dir 'tests'");
 }
 
 $bootstrap = trim("
@@ -90,14 +90,16 @@ class Psr4AutoloaderClass
 }
 
 \$loader = new Psr4AutoloaderClass();
-\$loader->addNamespace('test', __DIR__.'/../test');
+\$loader->addNamespace('tests', __DIR__.'/../tests');
 \$loader->addNamespace('your_namescape', __DIR__.'/../src');
 
 ");
-file_put_contents("$dir/test/bootstrap.php", $bootstrap);
+file_put_contents("$dir/tests/bootstrap.php", $bootstrap);
 
 $general = trim("
 <?php
+
+namespace tests;
 
 use PHPUnit\Framework\TestCase;
 
@@ -105,10 +107,10 @@ class GeneralTest extends TestCase
 {
     public function testName()
     {
-		
+		\$this->assertTrue(false);
     }
 }
 ");
-file_put_contents("$dir/test/general.php", $general);
+file_put_contents("$dir/tests/GeneralTest.php", $general);
 
 exit("Done");
