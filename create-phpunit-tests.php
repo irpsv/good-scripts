@@ -92,6 +92,7 @@ class Psr4AutoloaderClass
 \$loader = new Psr4AutoloaderClass();
 \$loader->addNamespace('tests', __DIR__.'/../tests');
 \$loader->addNamespace('your_namescape', __DIR__.'/../src');
+\$loader->register();
 
 ");
 file_put_contents("$dir/tests/bootstrap.php", $bootstrap);
